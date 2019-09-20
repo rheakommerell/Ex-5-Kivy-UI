@@ -15,7 +15,7 @@ MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 
 SCREEN_MANAGER = ScreenManager()
-MAIN_SCREEN_NAME = 'color: 1, 0, 0, 1main'
+MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
 
 
@@ -43,8 +43,6 @@ class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
-
-    counter_var = 0
 
     def switch(self, curr):
         if curr == "on":

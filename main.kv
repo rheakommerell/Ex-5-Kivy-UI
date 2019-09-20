@@ -3,6 +3,16 @@
     FloatLayout:
         size_hint: None, None
 
+    Slider:
+        id: slider
+        min: 0
+        max: 100
+        step: 1
+        size: 400, 30
+        center_y: 0
+        font_size: 20
+        orientation: 'horizontal'
+
     DPEAButton:
         id: motor_button
         text: "motor"
@@ -15,12 +25,11 @@
     Label:
         id: motor_label
         size_hint: None, None
+        text: "motor on"
         font_size: 20
-        text: 'motor on'
         center_x: 0.4 * root.width
         center_y: 0.4 * root.height
         color: 1, 1, 1, 1
-        bold: True
         outline_width: self.font_size * 0.1
         outline_color: 0, 0, 0
 
@@ -41,13 +50,6 @@
         y: 0.25 * root.height
         color: 0, 0, 1, 1
         on_press: self.text = root.count(self.text)
-
-    Slider:
-        id: slider
-        min: 0
-        max: 100
-        step: 1
-        orientation: 'horizontal'
 
     Label:
         id: slider_label
