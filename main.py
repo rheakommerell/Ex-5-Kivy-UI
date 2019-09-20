@@ -15,7 +15,7 @@ MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 
 SCREEN_MANAGER = ScreenManager()
-MAIN_SCREEN_NAME = 'main'
+MAIN_SCREEN_NAME = 'color: 1, 0, 0, 1main'
 ADMIN_SCREEN_NAME = 'admin'
 
 
@@ -35,10 +35,32 @@ class ProjectNameGUI(App):
 Window.clearcolor = (1, 1, 1, 1)  # White
 
 
+class ImageScreen(Screen):
+    def ret(self):
+        SCREEN_MANAGER.current = MAIN_SCREEN_NAME
+
 class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
+
+    counter_var = 0
+
+    def switch(self, curr):
+        if curr == "on":
+            return "off"
+        else:
+            return "on"
+
+    def count(self, c):
+        c_n = int(c) + 1
+        return str(c_n)
+
+    def motor_switch(self, c):
+        if c == "motor on":
+            return "motor off"
+        else:
+            return "motor on"
 
     def pressed(self):
         """
@@ -54,6 +76,9 @@ class MainScreen(Screen):
         :return: None
         """
         SCREEN_MANAGER.current = 'passCode'
+
+    def exit(self):
+        SCREEN_MANAGER.current = 'exit'
 
 
 class AdminScreen(Screen):
@@ -104,6 +129,7 @@ Widget additions
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(PassCodeScreen(name='passCode'))
+SCREEN_MANAGER.add_widget(ImageScreen(name='exit'))
 SCREEN_MANAGER.add_widget(PauseScreen(name='pauseScene'))
 SCREEN_MANAGER.add_widget(AdminScreen(name=ADMIN_SCREEN_NAME))
 
