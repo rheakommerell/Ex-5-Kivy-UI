@@ -4,12 +4,18 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.animation import Animation
 
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
 from pidev.kivy.PauseScreen import PauseScreen
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
+from pidev.Joystick import Joystick
+
+from threading import Thread
+from time import sleep
+
 
 MIXPANEL_TOKEN = "x"
 MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
@@ -34,15 +40,39 @@ class ProjectNameGUI(App):
 
 Window.clearcolor = (1, 1, 1, 1)  # White
 
+jstick = Joystick(number=0,ssh_deploy=False)
+
 
 class ImageScreen(Screen):
-    def ret(self):
+    def ret(self, widg):
+        anim = Animation(size=(400, 400)) + Animation(size=(80, 80))
+        anim.start(widg)
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 
 class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
+
+    def joy_update(self):
+        while True:
+            joy_x_val = jstick.get_axis('x')
+            joy_y_val = jstick.get_axis('y')
+            button_state = str(jstick.get_button_state(0))
+            all_buttons_state = False
+            for i in range(11):
+                if jstick.get_button_state(i) == 1:
+                    all_buttons_state = True
+                    break
+            self.ids.all_butts_label.text = str(all_buttons_state)
+            self.ids.joystick_label.text = button_state
+            self.ids.joy_pos_label.center_x = self.width * 0.5 * (1 + joy_x_val)
+            self.ids.joy_pos_label.center_y = self.height * -0.5 * (joy_y_val - 1)
+            sleep(.1)
+
+
+    def start_joy_thread(self):
+        Thread(target=self.joy_update).start()
 
     def switch(self, curr):
         if curr == "on":
@@ -61,7 +91,7 @@ class MainScreen(Screen):
             return "motor on"
 
     def pressed(self):
-        """
+        """return
         Function called on button touch event for button with id: testButton
         :return: None
         """
@@ -75,12 +105,15 @@ class MainScreen(Screen):
         """
         SCREEN_MANAGER.current = 'passCode'
 
-    def exit(self):
+    def exit(self, widg):
+        anim = Animation(size=(400, 400)) + Animation(size=(80, 80))
+        anim.start(widg)
         SCREEN_MANAGER.current = 'exit'
 
 
 class AdminScreen(Screen):
-    """
+    """80, 80))
+        anim.start(widg)
     Class to handle the AdminScreen and its functionality
     """
 
