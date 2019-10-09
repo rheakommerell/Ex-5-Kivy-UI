@@ -40,7 +40,7 @@ class ProjectNameGUI(App):
 
 Window.clearcolor = (1, 1, 1, 1)  # White
 
-jstick = Joystick(number=0,ssh_deploy=False)
+jstick = Joystick(number=0,ssh_deploy=True)
 
 
 class ImageScreen(Screen):
