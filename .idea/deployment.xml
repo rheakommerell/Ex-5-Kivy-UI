@@ -16,6 +16,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="pi@widget05-pi.local">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Documents/Ex-5-Kivy-UI" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
     <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
   </component>

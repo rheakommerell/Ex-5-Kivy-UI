@@ -40,7 +40,7 @@ class ProjectNameGUI(App):
 
 Window.clearcolor = (1, 1, 1, 1)  # White
 
-jstick = Joystick(number=0,ssh_deploy=True)
+#jstick = Joystick(number=0,ssh_deploy=True)
 
 
 class ImageScreen(Screen):
@@ -54,25 +54,25 @@ class MainScreen(Screen):
     Class to handle the main screen and its associated touch events
     """
 
-    def joy_update(self):
-        while True:
-            joy_x_val = jstick.get_axis('x')
-            joy_y_val = jstick.get_axis('y')
-            button_state = str(jstick.get_button_state(0))
-            all_buttons_state = False
-            for i in range(11):
-                if jstick.get_button_state(i) == 1:
-                    all_buttons_state = True
-                    break
-            self.ids.all_butts_label.text = str(all_buttons_state)
-            self.ids.joystick_label.text = button_state
-            self.ids.joy_pos_label.center_x = self.width * 0.5 * (1 + joy_x_val)
-            self.ids.joy_pos_label.center_y = self.height * -0.5 * (joy_y_val - 1)
-            sleep(.1)
+#    def joy_update(self):
+#        while True:
+#            joy_x_val = jstick.get_axis('x')
+#            joy_y_val = jstick.get_axis('y')
+#            button_state = str(jstick.get_button_state(0))
+#            all_buttons_state = False
+#            for i in range(11):
+#                if jstick.get_button_state(i) == 1:
+#                    all_buttons_state = True
+#                    break
+#            self.ids.all_butts_label.text = str(all_buttons_state)
+#            self.ids.joystick_label.text = button_state
+#            self.ids.joy_pos_label.center_x = self.width * 0.5 * (1 + joy_x_val)
+#            self.ids.joy_pos_label.center_y = self.height * -0.5 * (joy_y_val - 1)
+#            sleep(.1)
 
 
-    def start_joy_thread(self):
-        Thread(target=self.joy_update).start()
+#    def start_joy_thread(self):
+#        Thread(target=self.joy_update).start()
 
     def switch(self, curr):
         if curr == "on":
